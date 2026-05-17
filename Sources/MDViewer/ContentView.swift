@@ -5,7 +5,8 @@ struct ContentView: View {
     let document: MarkdownDocument
     let fileURL: URL?
 
-    @AppStorage("fontSize") private var fontSize: Double = 14
+    @AppStorage(FontSizePreferences.storageKey, store: FontSizePreferences.userDefaults)
+    private var fontSize = FontSizePreferences.defaultSize
     @AppStorage("theme") private var themeRaw: String = Theme.gitHub.rawValue
     @State private var searchText = ""
     @State private var selectedSectionID: Int? = nil
@@ -42,15 +43,17 @@ struct ContentView: View {
         }
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
-                Button { fontSize = max(10, fontSize - 1) } label: {
+                Button { fontSize = FontSizePreferences.decreased(fontSize) } label: {
                     Image(systemName: "textformat.size.smaller")
                 }
                 .help("Decrease Text Size")
+                .disabled(!FontSizePreferences.canDecrease(fontSize))
 
-                Button { fontSize = min(28, fontSize + 1) } label: {
+                Button { fontSize = FontSizePreferences.increased(fontSize) } label: {
                     Image(systemName: "textformat.size.larger")
                 }
                 .help("Increase Text Size")
+                .disabled(!FontSizePreferences.canIncrease(fontSize))
 
                 Divider()
 
@@ -69,6 +72,9 @@ struct ContentView: View {
             }
         }
         .searchable(text: $searchText, placement: .toolbar, prompt: "Find")
+        .onAppear {
+            fontSize = FontSizePreferences.clamped(fontSize)
+        }
     }
 
     // Extracted to help the compiler type-check the body

@@ -127,7 +127,9 @@ struct ContentView: View {
     }
 
     private var sectionedContent: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        // Gap between rendered sections so headings don't butt against
+        // the previous section's trailing content.
+        VStack(alignment: .leading, spacing: 28) {
             ForEach(sections) { section in
                 Markdown(section.content)
                     .markdownTheme(currentTheme.markdownTheme)

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C35533F2FCDC761002BB990 /* sample.md in Resources */ = {isa = PBXBuildFile; fileRef = 0C35533E2FCDC761002BB990 /* sample.md */; };
+		0C3553412FCDD351002BB990 /* Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3553402FCDD351002BB990 /* Format.swift */; };
 		3F11BDB290365E2AE950FED7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6C2EDBA76E05ABAC4E174 /* Assets.xcassets */; };
 		4D861C09522F138B17B2EFCD /* MDViewerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0CCC5A27526C86F1BB19866 /* MDViewerApp.swift */; };
 		5459FA2FA6F8B029EC8003E8 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6CBA34AA3D92A431DC7473 /* Theme.swift */; };
@@ -19,6 +21,8 @@
 
 /* Begin PBXFileReference section */
 		01CB89DA2B075F37F80CCDAD /* MDViewer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MDViewer.entitlements; sourceTree = "<group>"; };
+		0C35533E2FCDC761002BB990 /* sample.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = sample.md; sourceTree = "<group>"; };
+		0C3553402FCDD351002BB990 /* Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Format.swift; sourceTree = "<group>"; };
 		0FA6C2EDBA76E05ABAC4E174 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A6CBA34AA3D92A431DC7473 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		9BDE3AE4B23A4F67F2A0B7C3 /* DocumentSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentSection.swift; sourceTree = "<group>"; };
@@ -69,6 +73,7 @@
 				E0CCC5A27526C86F1BB19866 /* MDViewerApp.swift */,
 				F4F519BCABE5E8D36FC0EB4B /* OutlineSidebarView.swift */,
 				1A6CBA34AA3D92A431DC7473 /* Theme.swift */,
+				0C3553402FCDD351002BB990 /* Format.swift */,
 			);
 			path = MDViewer;
 			sourceTree = "<group>";
@@ -86,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				0FA6C2EDBA76E05ABAC4E174 /* Assets.xcassets */,
+				0C35533E2FCDC761002BB990 /* sample.md */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -155,6 +161,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C35533F2FCDC761002BB990 /* sample.md in Resources */,
 				3F11BDB290365E2AE950FED7 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -168,6 +175,7 @@
 			files = (
 				BF6223C28FFF82CAA235F223 /* ContentView.swift in Sources */,
 				B78F884C8AE734C94D61EF32 /* DocumentSection.swift in Sources */,
+				0C3553412FCDD351002BB990 /* Format.swift in Sources */,
 				4D861C09522F138B17B2EFCD /* MDViewerApp.swift in Sources */,
 				A1B1788E63C280578CBD2A99 /* MarkdownDocument.swift in Sources */,
 				FF59175CF228DBBC795C4FDD /* OutlineSidebarView.swift in Sources */,

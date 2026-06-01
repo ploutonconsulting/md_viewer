@@ -8,6 +8,7 @@ struct ContentView: View {
     @AppStorage(FontSizePreferences.storageKey, store: FontSizePreferences.userDefaults)
     private var fontSize = FontSizePreferences.defaultSize
     @AppStorage("theme") private var themeRaw: String = Theme.gitHub.rawValue
+    @AppStorage("format") private var formatView: String = Format.preview.rawValue
     @State private var searchText = ""
     @State private var selectedSectionID: Int? = nil
     @Environment(\.colorScheme) private var colorScheme
@@ -64,6 +65,13 @@ struct ContentView: View {
                 }
                 .pickerStyle(.menu)
                 .help("Select Theme")
+                
+                Picker("Format", selection: $formatView) {
+                    ForEach(Format.allCases) { t in
+                        Text(t.label).tag(t.rawValue)
+                    }
+                }
+                .pickerStyle(.inline)
 
                 ShareLink(item: document.text) {
                     Label("Share", systemImage: "square.and.arrow.up")
@@ -78,26 +86,44 @@ struct ContentView: View {
     }
 
     // Extracted to help the compiler type-check the body
-    @ViewBuilder
     private var pageCard: some View {
-        if searchText.isEmpty {
-            sectionedContent
-                .padding(40)
-                .background(pageColor)
-                .clipShape(RoundedRectangle(cornerRadius: 2, style: .continuous))
-                .shadow(color: shadowColor, radius: 8, x: 0, y: 2)
-                .frame(maxWidth: 820)
-        } else {
-            Markdown(filteredText)
-                .markdownTheme(currentTheme.markdownTheme)
-                .markdownTextStyle { FontSize(fontSize) }
-                .textSelection(.enabled)
-                .padding(40)
-                .background(pageColor)
-                .clipShape(RoundedRectangle(cornerRadius: 2, style: .continuous))
-                .shadow(color: shadowColor, radius: 8, x: 0, y: 2)
-                .frame(maxWidth: 820)
+        cardContent
+            .padding(40)
+            .background(pageColor)
+            .clipShape(RoundedRectangle(cornerRadius: 2, style: .continuous))
+            .shadow(color: shadowColor, radius: 8, x: 0, y: 2)
+            .frame(maxWidth: 820)
+    }
+
+    @ViewBuilder
+    private var cardContent: some View {
+        switch currentFormat {
+        case .raw:
+            rawContent
+        case .preview:
+            if searchText.isEmpty {
+                sectionedContent
+            } else {
+                Markdown(filteredText)
+                    .markdownTheme(currentTheme.markdownTheme)
+                    .markdownTextStyle { FontSize(fontSize) }
+                    .textSelection(.enabled)
+            }
         }
+    }
+
+    // Verbatim source, monospaced. Theme is intentionally inert here;
+    // font size and the line filter still apply.
+    private var rawContent: some View {
+        Text(rawSource)
+            .font(.system(size: fontSize, design: .monospaced))
+            .textSelection(.enabled)
+            .multilineTextAlignment(.leading)
+            .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private var rawSource: String {
+        searchText.isEmpty ? document.text : filteredText
     }
 
     private var sectionedContent: some View {
@@ -121,6 +147,10 @@ struct ContentView: View {
 
     private var currentTheme: Theme {
         Theme(rawValue: themeRaw) ?? .gitHub
+    }
+
+    private var currentFormat: Format {
+        Format(rawValue: formatView) ?? .preview
     }
 
     private var pageColor: Color {

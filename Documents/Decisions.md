@@ -94,3 +94,29 @@ Filter approach — split document by newline, keep only lines matching the sear
 - No match count or navigation between matches.
 - Implementation is ~5 lines of code.
 - Can be upgraded to in-place highlighting later if needed.
+
+---
+
+## ADR-006 — Evaluated mdxg as a rendering dependency
+
+**Date:** 2026-05-28  
+**Status:** Not adopted — use as design reference only
+
+### Context
+[mdxg](https://github.com/vercel-labs/mdxg) is a specification and TypeScript reference implementation that defines how markdown viewers should present and navigate documents. Features it standardises: virtual page splitting of long documents, prev/next page navigation, document-level outline/TOC, search, theming, and editor/viewer mode toggles.
+
+We evaluated it as a potential dependency or design reference for md_viewer.
+
+### Decision
+Do not adopt as a dependency. The repo is 94% TypeScript with no Swift package. It cannot be imported into a native macOS SwiftUI app.
+
+Use the **spec as a design reference** for future UX work, particularly:
+
+- **Virtual paging** — split long documents at `##` heading boundaries and expose prev/next navigation. `DocumentSection.parsedSections()` already performs the split; adding a `currentPageIndex: Int` state and navigation controls in `ContentView` is the only remaining work.
+- **Page outline** — the sidebar already satisfies this part of the spec.
+- **Search** — partially satisfies the spec (line filter today; in-place highlighting is the gap).
+
+### Consequences
+- No new dependency introduced.
+- Paged navigation is a well-scoped future feature: state change in `ContentView`, two toolbar buttons, no new parsing logic needed.
+- Full mdxg spec conformance is achievable natively with ~1–2 focused sessions of work.

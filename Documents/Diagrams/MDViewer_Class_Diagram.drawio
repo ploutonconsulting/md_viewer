@@ -1,0 +1,331 @@
+<mxfile host="65bd71144e">
+    <diagram id="mdviewer-classes" name="MDViewer Class Diagram">
+        <mxGraphModel dx="1756" dy="1067" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="title" value="MDViewer — Class Diagram&#xa;Native macOS Markdown Viewer (SwiftUI)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1a1a2e;strokeColor=#1a1a2e;fontColor=#ffffff;fontSize=18;fontStyle=1;verticalAlign=middle;" parent="1" vertex="1">
+                    <mxGeometry x="60" y="20" width="1540" height="56" as="geometry"/>
+                </mxCell>
+                <mxCell id="app" value="MDViewerApp" style="swimlane;html=1;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;fontFamily=Verdana;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="670" y="97" width="220" height="86" as="geometry"/>
+                </mxCell>
+                <mxCell id="app-s" value="«struct : App»  @main" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontStyle=2;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="app" vertex="1">
+                    <mxGeometry y="26" width="220" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="app-l" value="" style="line;html=1;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;" parent="app" vertex="1">
+                    <mxGeometry y="52" width="220" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="app-m1" value="+ body: some Scene" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="app" vertex="1">
+                    <mxGeometry y="60" width="220" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="cmds" value="FontSizeCommands" style="swimlane;html=1;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;rounded=0;fillColor=#ffcd28;strokeColor=#d79b00;fontFamily=Verdana;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="970" y="97" width="220" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="cmds-s" value="«private struct : Commands»" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontStyle=2;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="cmds" vertex="1">
+                    <mxGeometry y="26" width="220" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="cmds-a1" value="- fontSize: Double  @AppStorage" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="cmds" vertex="1">
+                    <mxGeometry y="52" width="220" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="cmds-l" value="" style="line;html=1;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;" parent="cmds" vertex="1">
+                    <mxGeometry y="78" width="220" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="cmds-m1" value="+ body: some Commands" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="cmds" vertex="1">
+                    <mxGeometry y="86" width="220" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="prefs" value="FontSizePreferences" style="swimlane;html=1;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;rounded=0;fillColor=#e1d5e7;strokeColor=#9673a6;fontFamily=Verdana;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="1300" y="97" width="260" height="290" as="geometry"/>
+                </mxCell>
+                <mxCell id="prefs-s" value="«enum» — preferences namespace" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontStyle=2;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="prefs" vertex="1">
+                    <mxGeometry y="26" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="prefs-a1" value="+ defaultSize: Double = 14" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="prefs" vertex="1">
+                    <mxGeometry y="52" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="prefs-a2" value="+ minimumSize / maximumSize: Double" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="prefs" vertex="1">
+                    <mxGeometry y="78" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="prefs-a3" value="+ storageKey: String" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="prefs" vertex="1">
+                    <mxGeometry y="104" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="prefs-a4" value="+ userDefaults: UserDefaults" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="prefs" vertex="1">
+                    <mxGeometry y="130" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="prefs-l" value="" style="line;html=1;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;" parent="prefs" vertex="1">
+                    <mxGeometry y="156" width="260" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="prefs-m1" value="+ clamped(Double): Double" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="prefs" vertex="1">
+                    <mxGeometry y="164" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="prefs-m2" value="+ increased / decreased(Double): Double" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="prefs" vertex="1">
+                    <mxGeometry y="190" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="prefs-m3" value="+ canIncrease / canDecrease(Double): Bool" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="prefs" vertex="1">
+                    <mxGeometry y="216" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="prefs-m4" value="+ isDefault(Double): Bool" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="prefs" vertex="1">
+                    <mxGeometry y="242" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="sidebar" value="OutlineSidebarView" style="swimlane;html=1;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Verdana;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="120" y="320" width="240" height="138" as="geometry"/>
+                </mxCell>
+                <mxCell id="sidebar-s" value="«struct : View»" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontStyle=2;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="sidebar" vertex="1">
+                    <mxGeometry y="26" width="240" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="sidebar-a1" value="+ sections: [DocumentSection]" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="sidebar" vertex="1">
+                    <mxGeometry y="52" width="240" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="sidebar-a2" value="+ selectedSectionID: Int?  @Binding" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="sidebar" vertex="1">
+                    <mxGeometry y="78" width="240" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="sidebar-l" value="" style="line;html=1;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;" parent="sidebar" vertex="1">
+                    <mxGeometry y="104" width="240" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="sidebar-m1" value="+ body: some View" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="sidebar" vertex="1">
+                    <mxGeometry y="112" width="240" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="content" value="ContentView" style="swimlane;html=1;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Verdana;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="650" y="282" width="260" height="268" as="geometry"/>
+                </mxCell>
+                <mxCell id="content-s" value="«struct : View»" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontStyle=2;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="content" vertex="1">
+                    <mxGeometry y="26" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="content-a1" value="+ document: MarkdownDocument" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="content" vertex="1">
+                    <mxGeometry y="52" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="content-a2" value="+ fileURL: URL?" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="content" vertex="1">
+                    <mxGeometry y="78" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="content-a3" value="- fontSize: Double  @AppStorage" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="content" vertex="1">
+                    <mxGeometry y="104" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="content-a4" value="- themeRaw: String  @AppStorage" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="content" vertex="1">
+                    <mxGeometry y="130" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="content-a5" value="- searchText: String  @State" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="content" vertex="1">
+                    <mxGeometry y="156" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="content-a6" value="- selectedSectionID: Int?  @State" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="content" vertex="1">
+                    <mxGeometry y="182" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="content-a7" value="- sections: [DocumentSection]  {computed}" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="content" vertex="1">
+                    <mxGeometry y="208" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="content-l" value="" style="line;html=1;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;" parent="content" vertex="1">
+                    <mxGeometry y="234" width="260" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="content-m1" value="+ body: some View" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="content" vertex="1">
+                    <mxGeometry y="242" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="status" value="StatusBar" style="swimlane;html=1;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Verdana;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="140" y="170" width="220" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="status-s" value="«private struct : View»" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontStyle=2;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="status" vertex="1">
+                    <mxGeometry y="26" width="220" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="status-a1" value="+ fileURL: URL?" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="status" vertex="1">
+                    <mxGeometry y="52" width="220" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="status-l" value="" style="line;html=1;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;" parent="status" vertex="1">
+                    <mxGeometry y="78" width="220" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="status-m1" value="+ body: some View" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="status" vertex="1">
+                    <mxGeometry y="86" width="220" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="doc" value="MarkdownDocument" style="swimlane;html=1;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;rounded=0;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Verdana;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="650" y="610" width="260" height="216" as="geometry"/>
+                </mxCell>
+                <mxCell id="doc-s" value="«struct : FileDocument»" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontStyle=2;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="doc" vertex="1">
+                    <mxGeometry y="26" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="doc-a1" value="+ readableContentTypes: [UTType]" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="doc" vertex="1">
+                    <mxGeometry y="52" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="doc-a2" value="+ writableContentTypes: [UTType]" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="doc" vertex="1">
+                    <mxGeometry y="78" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="doc-a3" value="+ text: String" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="doc" vertex="1">
+                    <mxGeometry y="104" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="doc-l" value="" style="line;html=1;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;" parent="doc" vertex="1">
+                    <mxGeometry y="130" width="260" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="doc-m1" value="+ init(text: String)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="doc" vertex="1">
+                    <mxGeometry y="138" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="doc-m2" value="+ init(configuration: ReadConfiguration)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="doc" vertex="1">
+                    <mxGeometry y="164" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="doc-m3" value="+ fileWrapper(...): FileWrapper" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="doc" vertex="1">
+                    <mxGeometry y="190" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="section" value="DocumentSection" style="swimlane;html=1;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;rounded=0;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Verdana;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="120" y="610" width="240" height="156" as="geometry"/>
+                </mxCell>
+                <mxCell id="section-s" value="«struct : Identifiable»" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontStyle=2;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="section" vertex="1">
+                    <mxGeometry y="26" width="240" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="section-a1" value="+ id: Int" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="section" vertex="1">
+                    <mxGeometry y="52" width="240" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="section-a2" value="+ level: Int  (0=preamble, 1–3=heading)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="section" vertex="1">
+                    <mxGeometry y="78" width="240" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="section-a3" value="+ title: String" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="section" vertex="1">
+                    <mxGeometry y="104" width="240" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="section-a4" value="+ content: String" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="section" vertex="1">
+                    <mxGeometry y="130" width="240" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="strext" value="String  (extension)" style="swimlane;html=1;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;rounded=0;fillColor=#f5f5f5;strokeColor=#666666;fontFamily=Verdana;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="970" y="713" width="260" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="strext-s" value="«extension» — section parsing" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontStyle=2;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="strext" vertex="1">
+                    <mxGeometry y="26" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="strext-l" value="" style="line;html=1;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;" parent="strext" vertex="1">
+                    <mxGeometry y="52" width="260" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="strext-m1" value="+ parsedSections(): [DocumentSection]" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="strext" vertex="1">
+                    <mxGeometry y="60" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="strext-m2" value="- markdownHeading(): (Int, String)?" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="strext" vertex="1">
+                    <mxGeometry y="86" width="260" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="theme" value="Theme" style="swimlane;html=1;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;rounded=0;fillColor=#e1d5e7;strokeColor=#9673a6;fontFamily=Verdana;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="1260" y="620" width="240" height="216" as="geometry"/>
+                </mxCell>
+                <mxCell id="theme-s" value="«enum : String, CaseIterable, Identifiable»" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontStyle=2;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="theme" vertex="1">
+                    <mxGeometry y="26" width="240" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="theme-a1" value="+ gitHub" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="theme" vertex="1">
+                    <mxGeometry y="52" width="240" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="theme-a2" value="+ docC" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="theme" vertex="1">
+                    <mxGeometry y="78" width="240" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="theme-a3" value="+ basic" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="theme" vertex="1">
+                    <mxGeometry y="104" width="240" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="theme-l" value="" style="line;html=1;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;" parent="theme" vertex="1">
+                    <mxGeometry y="130" width="240" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="theme-m1" value="+ id: String" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="theme" vertex="1">
+                    <mxGeometry y="138" width="240" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="theme-m2" value="+ label: String" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="theme" vertex="1">
+                    <mxGeometry y="164" width="240" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="theme-m3" value="+ markdownTheme: MarkdownUI.Theme" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="theme" vertex="1">
+                    <mxGeometry y="190" width="240" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="uttype" value="UTType  (extension)" style="swimlane;html=1;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;swimlaneFillColor=#ffffff;rounded=0;fillColor=#f5f5f5;strokeColor=#666666;fontFamily=Verdana;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="390" y="747" width="220" height="78" as="geometry"/>
+                </mxCell>
+                <mxCell id="uttype-s" value="«extension»" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;fontStyle=2;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="uttype" vertex="1">
+                    <mxGeometry y="26" width="220" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="uttype-a1" value="+ markdown: UTType" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;whiteSpace=wrap;overflow=hidden;rotatable=0;" parent="uttype" vertex="1">
+                    <mxGeometry y="52" width="220" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="ext-mdui" value="«external»&#xa;MarkdownUI.Theme" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#f5f5f5;strokeColor=#666666;dashed=1;fontFamily=Verdana;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="1280" y="900" width="200" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="e-app-content" value="creates (DocumentGroup)" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=open;endFill=0;dashed=1;strokeColor=#d6b656;strokeWidth=2;fontFamily=Verdana;fontSize=10;" parent="1" source="app" target="content" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e-app-doc" value="viewing:" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=open;endFill=0;dashed=1;strokeColor=#d6b656;strokeWidth=2;fontFamily=Verdana;fontSize=10;" parent="1" source="app-m1" target="doc" edge="1">
+                    <mxGeometry x="0.2549" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="880" y="220"/>
+                            <mxPoint x="960" y="220"/>
+                            <mxPoint x="960" y="660"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e-app-cmds" value=".commands" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=open;endFill=0;dashed=1;strokeColor=#d6b656;strokeWidth=2;fontFamily=Verdana;fontSize=10;" parent="1" source="app" target="cmds" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e-cmds-prefs" value="reads / writes" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=open;endFill=0;dashed=1;strokeColor=#9673a6;strokeWidth=2;fontFamily=Verdana;fontSize=10;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="cmds" target="prefs-a2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e-content-sidebar" value="sidebar" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=diamondThin;endFill=1;startArrow=none;strokeColor=#6c8ebf;strokeWidth=2;fontFamily=Verdana;fontSize=10;entryX=0;entryY=0.75;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="sidebar-s" target="content-a2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e-content-status" value="status bar" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=diamondThin;endFill=1;startArrow=none;strokeColor=#6c8ebf;strokeWidth=2;fontFamily=Verdana;fontSize=10;entryX=0;entryY=0;entryDx=0;entryDy=0;" parent="1" source="status" target="content-s" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="690" y="282" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="570" y="226"/>
+                            <mxPoint x="570" y="310"/>
+                            <mxPoint x="640" y="310"/>
+                            <mxPoint x="640" y="308"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e-content-doc" value="document" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=open;endFill=0;strokeColor=#666666;strokeWidth=2;fontFamily=Verdana;fontSize=10;" parent="1" source="content" target="doc" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e-content-theme" value="currentTheme" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=open;endFill=0;dashed=1;strokeColor=#9673a6;strokeWidth=2;fontFamily=Verdana;fontSize=10;exitX=1;exitY=0.75;exitDx=0;exitDy=0;" parent="1" source="content-a4" target="theme" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e-content-prefs" value="fontSize" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=open;endFill=0;dashed=1;strokeColor=#9673a6;strokeWidth=2;fontFamily=Verdana;fontSize=10;" parent="1" source="content" target="prefs" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e-content-section" value="sections" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=open;endFill=0;dashed=1;strokeColor=#82b366;strokeWidth=2;fontFamily=Verdana;fontSize=10;" parent="1" source="content" target="section" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="480" y="480"/>
+                            <mxPoint x="480" y="688"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e-sidebar-section" value="sections [ ]" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=open;endFill=0;strokeColor=#666666;strokeWidth=2;fontFamily=Verdana;fontSize=10;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" parent="1" source="sidebar" target="section" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="260" y="600"/>
+                            <mxPoint x="260" y="600"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e-strext-section" value="produces" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=open;endFill=0;dashed=1;strokeColor=#666666;strokeWidth=2;fontFamily=Verdana;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="strext-m2" target="section" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1100" y="860"/>
+                            <mxPoint x="200" y="860"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e-content-strext" value="text.parsedSections()" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=open;endFill=0;dashed=1;strokeColor=#666666;strokeWidth=2;fontFamily=Verdana;fontSize=10;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="content-a5" target="strext" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e-doc-uttype" value=".markdown UTI" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=open;endFill=0;dashed=1;strokeColor=#666666;strokeWidth=2;fontFamily=Verdana;fontSize=10;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="doc" target="uttype" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e-theme-mdui" value="maps to" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=open;endFill=0;dashed=1;strokeColor=#666666;strokeWidth=2;fontFamily=Verdana;fontSize=10;" parent="1" source="theme" target="ext-mdui" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend" value="LEGEND" style="swimlane;html=1;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=0;swimlaneFillColor=#ffffff;rounded=0;fillColor=#1a1a2e;strokeColor=#1a1a2e;fontColor=#ffffff;fontFamily=Verdana;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="120" y="900" width="540" height="190" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend-1" value="◆──  composition (View owns subview)        ───▶  association (holds reference)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;whiteSpace=wrap;overflow=hidden;fontFamily=Verdana;fontSize=11;" parent="legend" vertex="1">
+                    <mxGeometry y="26" width="540" height="28" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend-2" value="- - -▷  dependency (uses / creates / produces / maps)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;whiteSpace=wrap;overflow=hidden;fontFamily=Verdana;fontSize=11;" parent="legend" vertex="1">
+                    <mxGeometry y="54" width="540" height="28" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend-3" value="Amber = App / Scene entry      Orange = Commands      Purple = enum / config" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;whiteSpace=wrap;overflow=hidden;fontFamily=Verdana;fontSize=11;" parent="legend" vertex="1">
+                    <mxGeometry y="82" width="540" height="28" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend-4" value="Blue = SwiftUI View      Green = Model / data      Grey = extension / external" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;whiteSpace=wrap;overflow=hidden;fontFamily=Verdana;fontSize=11;" parent="legend" vertex="1">
+                    <mxGeometry y="110" width="540" height="28" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend-5" value="« » = Swift type kind + conformed protocols      @ = SwiftUI property wrapper" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=8;whiteSpace=wrap;overflow=hidden;fontStyle=2;fontFamily=Verdana;fontSize=11;" parent="legend" vertex="1">
+                    <mxGeometry y="138" width="540" height="28" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

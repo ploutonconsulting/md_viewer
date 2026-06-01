@@ -7,8 +7,8 @@ struct ContentView: View {
 
     @AppStorage(FontSizePreferences.storageKey, store: FontSizePreferences.userDefaults)
     private var fontSize = FontSizePreferences.defaultSize
-    @AppStorage("theme") private var themeRaw: String = Theme.gitHub.rawValue
     @AppStorage("format") private var formatView: String = Format.preview.rawValue
+    @AppStorage("lineSpacing") private var lineSpacingRaw: String = LineSpacing.normal.rawValue
     @State private var searchText = ""
     @State private var selectedSectionID: Int? = nil
     @Environment(\.colorScheme) private var colorScheme
@@ -58,20 +58,20 @@ struct ContentView: View {
 
                 Divider()
 
-                Picker("Theme", selection: $themeRaw) {
-                    ForEach(Theme.allCases) { t in
-                        Text(t.label).tag(t.rawValue)
-                    }
-                }
-                .pickerStyle(.menu)
-                .help("Select Theme")
-                
                 Picker("Format", selection: $formatView) {
                     ForEach(Format.allCases) { t in
                         Text(t.label).tag(t.rawValue)
                     }
                 }
                 .pickerStyle(.inline)
+
+                Picker("Line Spacing", selection: $lineSpacingRaw) {
+                    ForEach(LineSpacing.allCases) { s in
+                        Text(s.label).tag(s.rawValue)
+                    }
+                }
+                .pickerStyle(.inline)
+                .help("Line Spacing")
 
                 ShareLink(item: document.text) {
                     Label("Share", systemImage: "square.and.arrow.up")
@@ -105,9 +105,8 @@ struct ContentView: View {
                 sectionedContent
             } else {
                 Markdown(filteredText)
-                    .markdownTheme(currentTheme.markdownTheme)
-                    .markdownTextStyle { FontSize(fontSize) }
-                    .textSelection(.enabled)
+                    .modifier(PreviewMarkdownStyle(fontSize: fontSize,
+                                                   lineSpacingEm: currentLineSpacing.em))
             }
         }
     }
@@ -132,9 +131,8 @@ struct ContentView: View {
         VStack(alignment: .leading, spacing: 28) {
             ForEach(sections) { section in
                 Markdown(section.content)
-                    .markdownTheme(currentTheme.markdownTheme)
-                    .markdownTextStyle { FontSize(fontSize) }
-                    .textSelection(.enabled)
+                    .modifier(PreviewMarkdownStyle(fontSize: fontSize,
+                                                   lineSpacingEm: currentLineSpacing.em))
                     .id(section.id)
             }
         }
@@ -147,12 +145,12 @@ struct ContentView: View {
             .joined(separator: "\n")
     }
 
-    private var currentTheme: Theme {
-        Theme(rawValue: themeRaw) ?? .gitHub
-    }
-
     private var currentFormat: Format {
         Format(rawValue: formatView) ?? .preview
+    }
+
+    private var currentLineSpacing: LineSpacing {
+        LineSpacing(rawValue: lineSpacingRaw) ?? .normal
     }
 
     private var pageColor: Color {
@@ -161,6 +159,26 @@ struct ContentView: View {
 
     private var shadowColor: Color {
         colorScheme == .dark ? .black.opacity(0.4) : .black.opacity(0.15)
+    }
+}
+
+// Shared styling for the rendered (preview) Markdown. There is no
+// user-selectable theme: rendering uses MarkdownUI's default style with the
+// paragraph block overridden so the line-spacing presets take effect.
+private struct PreviewMarkdownStyle: ViewModifier {
+    let fontSize: Double
+    let lineSpacingEm: CGFloat
+
+    func body(content: Content) -> some View {
+        content
+            .markdownTextStyle { FontSize(fontSize) }
+            .markdownBlockStyle(\.paragraph) { configuration in
+                configuration.label
+                    .fixedSize(horizontal: false, vertical: true)
+                    .relativeLineSpacing(.em(lineSpacingEm))
+                    .markdownMargin(top: .zero, bottom: .em(1))
+            }
+            .textSelection(.enabled)
     }
 }
 

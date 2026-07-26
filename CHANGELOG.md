@@ -5,6 +5,13 @@ All notable changes to MDViewer are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.2] - 2026-07-26
+
+### Fixed
+- Re-release of 0.2.1 with a Developer ID signed, Apple-notarized build. The
+  0.2.1 artifact was ad-hoc signed and rejected by Gatekeeper; its assets could
+  not be replaced because the release is immutable. No code changes.
+
 ## [0.2.1] - 2026-07-26
 
 ### Fixed

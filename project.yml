@@ -22,8 +22,8 @@ targets:
       path: Sources/MDViewer/Info.plist
       properties:
         CFBundleDisplayName: MD Viewer
-        CFBundleShortVersionString: "0.2.1"
-        CFBundleVersion: "5"
+        CFBundleShortVersionString: "0.2.2"
+        CFBundleVersion: "6"
         CFBundleIconName: AppIcon
         CFBundleIconFile: AppIcon
         LSApplicationCategoryType: public.app-category.developer-tools
@@ -66,8 +66,8 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.ploutonconsulting.mdviewer
-        MARKETING_VERSION: "0.2.1"
-        CURRENT_PROJECT_VERSION: "5"
+        MARKETING_VERSION: "0.2.2"
+        CURRENT_PROJECT_VERSION: "6"
         DEVELOPMENT_TEAM: "7X2XV24BPN"
         SWIFT_VERSION: "5.10"
         GENERATE_INFOPLIST_FILE: NO

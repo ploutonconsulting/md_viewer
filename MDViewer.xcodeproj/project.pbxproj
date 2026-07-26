@@ -346,7 +346,7 @@
 				CODE_SIGN_ENTITLEMENTS = Sources/MDViewer/MDViewer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 7X2XV24BPN;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -356,7 +356,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.2.1;
+				MARKETING_VERSION = 0.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ploutonconsulting.mdviewer;
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.10;
@@ -452,7 +452,7 @@
 				CODE_SIGN_ENTITLEMENTS = Sources/MDViewer/MDViewer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 7X2XV24BPN;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -462,7 +462,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.2.1;
+				MARKETING_VERSION = 0.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ploutonconsulting.mdviewer;
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.10;

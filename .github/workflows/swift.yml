@@ -42,9 +42,15 @@ jobs:
 
       - name: Test
         run: |
+          # Ad-hoc signing: the runner has no Developer ID or Mac Development
+          # certificate, and the test bundle must still load into its host app.
           set -o pipefail
           xcodebuild test \
             -project MDViewer.xcodeproj \
             -scheme MDViewer \
             -destination 'platform=macOS' \
-            -derivedDataPath build
+            -derivedDataPath build \
+            CODE_SIGN_STYLE=Manual \
+            CODE_SIGN_IDENTITY="-" \
+            DEVELOPMENT_TEAM="" \
+            ENABLE_HARDENED_RUNTIME=NO

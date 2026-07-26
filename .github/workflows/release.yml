@@ -77,11 +77,17 @@ jobs:
 
       - name: Run tests
         run: |
+          # Ad-hoc signed: this runs before the Developer ID certificate is
+          # imported, and the tests do not depend on the release identity.
           set -o pipefail
           xcodebuild test \
             -project MDViewer.xcodeproj \
             -scheme "$SCHEME" \
-            -destination 'platform=macOS'
+            -destination 'platform=macOS' \
+            CODE_SIGN_STYLE=Manual \
+            CODE_SIGN_IDENTITY="-" \
+            DEVELOPMENT_TEAM="" \
+            ENABLE_HARDENED_RUNTIME=NO
 
       - name: Import signing certificate
         env:

@@ -13,8 +13,22 @@ struct ContentView: View {
     @State private var selectedSectionID: Int? = nil
     @Environment(\.colorScheme) private var colorScheme
 
+    // Split once when the view value is created, not once per consumer:
+    // as a computed property this re-parsed the whole document on every
+    // read, several times per render pass.
+    private let frontmatter: Frontmatter?
+    private let documentBody: String
+
+    init(document: MarkdownDocument, fileURL: URL?) {
+        self.document = document
+        self.fileURL = fileURL
+        let split = FrontmatterParser.split(document.text)
+        self.frontmatter = split.frontmatter
+        self.documentBody = split.body
+    }
+
     private var sections: [DocumentSection] {
-        document.text.parsedSections()
+        documentBody.parsedSections()
     }
 
     var body: some View {
@@ -101,12 +115,20 @@ struct ContentView: View {
         case .raw:
             rawContent
         case .preview:
-            if searchText.isEmpty {
-                sectionedContent
-            } else {
-                Markdown(filteredText)
-                    .modifier(PreviewMarkdownStyle(fontSize: fontSize,
-                                                   lineSpacingEm: currentLineSpacing.em))
+            // The table sits outside sectionedContent's own VStack, with the
+            // same 28pt gap used between rendered sections, so it reads as a
+            // fixed document header rather than page content.
+            VStack(alignment: .leading, spacing: 28) {
+                if let frontmatter, !frontmatter.isEmpty {
+                    FrontmatterTableView(frontmatter: frontmatter, fontSize: fontSize)
+                }
+                if searchText.isEmpty {
+                    sectionedContent
+                } else {
+                    Markdown(filteredText)
+                        .modifier(PreviewMarkdownStyle(fontSize: fontSize,
+                                                       lineSpacingEm: currentLineSpacing.em))
+                }
             }
         }
     }
@@ -121,25 +143,40 @@ struct ContentView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
     }
 
+    // Raw mode is byte-verbatim source, so its filter runs over the whole
+    // document — frontmatter lines included. Only the preview filter works
+    // off the body.
     private var rawSource: String {
-        searchText.isEmpty ? document.text : filteredText
+        searchText.isEmpty ? document.text : matchingLines(in: document.text)
     }
 
+    @ViewBuilder
     private var sectionedContent: some View {
-        // Gap between rendered sections so headings don't butt against
-        // the previous section's trailing content.
-        VStack(alignment: .leading, spacing: 28) {
-            ForEach(sections) { section in
-                Markdown(section.content)
-                    .modifier(PreviewMarkdownStyle(fontSize: fontSize,
-                                                   lineSpacingEm: currentLineSpacing.em))
-                    .id(section.id)
+        // A frontmatter-only document has an empty body: suppress
+        // DocumentSection's whole-document fallback so it doesn't draw a
+        // blank section card below the table.
+        if documentBody.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            EmptyView()
+        } else {
+            // Gap between rendered sections so headings don't butt against
+            // the previous section's trailing content.
+            VStack(alignment: .leading, spacing: 28) {
+                ForEach(sections) { section in
+                    Markdown(section.content)
+                        .modifier(PreviewMarkdownStyle(fontSize: fontSize,
+                                                       lineSpacingEm: currentLineSpacing.em))
+                        .id(section.id)
+                }
             }
         }
     }
 
     private var filteredText: String {
-        document.text
+        matchingLines(in: documentBody)
+    }
+
+    private func matchingLines(in text: String) -> String {
+        text
             .split(separator: "\n", omittingEmptySubsequences: false)
             .filter { $0.localizedCaseInsensitiveContains(searchText) }
             .joined(separator: "\n")

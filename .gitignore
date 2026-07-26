@@ -17,6 +17,7 @@ Pods/
 *.xcarchive/
 
 # Local tooling
-.claude/
+.claude/*
+!.claude/specs/
 .mcp.json
 .remember/

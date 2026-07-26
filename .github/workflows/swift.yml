@@ -2,9 +2,9 @@ name: Build
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "development", "release" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "development", "release" ]
 
 jobs:
   build:
@@ -39,3 +39,12 @@ jobs:
               -derivedDataPath build \
               CODE_SIGNING_ALLOWED=NO \
               build
+
+      - name: Test
+        run: |
+          set -o pipefail
+          xcodebuild test \
+            -project MDViewer.xcodeproj \
+            -scheme MDViewer \
+            -destination 'platform=macOS' \
+            -derivedDataPath build

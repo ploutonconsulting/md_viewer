@@ -2,9 +2,9 @@ name: Build
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "development", "release" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "development", "release" ]
 
 jobs:
   build:
@@ -39,3 +39,19 @@ jobs:
               -derivedDataPath build \
               CODE_SIGNING_ALLOWED=NO \
               build
+
+      - name: Test
+        run: |
+          # Ad-hoc signing: the runner has no Developer ID or Mac Development
+          # certificate, and the test bundle must still load into its host app.
+          set -o pipefail
+          xcodebuild test \
+            -project MDViewer.xcodeproj \
+            -scheme MDViewer \
+            -destination 'platform=macOS' \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGN_STYLE=Manual \
+            CODE_SIGN_IDENTITY="-" \
+            DEVELOPMENT_TEAM="" \
+            ENABLE_HARDENED_RUNTIME=NO

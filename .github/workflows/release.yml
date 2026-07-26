@@ -1,10 +1,20 @@
 name: Release
 
+# Builds, signs, notarizes and publishes a release.
+#
+# Required repository secrets — the workflow fails fast if any are missing,
+# so it can never publish an unsigned artifact:
+#   MACOS_CERT_P12_BASE64  base64 of the "Developer ID Application" .p12 export
+#   MACOS_CERT_PASSWORD    password used when exporting that .p12
+#   ASC_KEY_ID             App Store Connect API key ID
+#   ASC_ISSUER_ID          App Store Connect issuer ID
+#   ASC_KEY_P8_BASE64      base64 of the AuthKey_<KEY_ID>.p8 file
+
 on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Version (without leading v, e.g. 0.1.1)"
+        description: "Version (without leading v, e.g. 0.2.2)"
         required: true
 
 permissions:
@@ -17,8 +27,31 @@ jobs:
       SCHEME: MDViewer
       CONFIGURATION: Release
       APP_NAME: MDViewer
+      TEAM_ID: 7X2XV24BPN
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
+
+      - name: Require signing credentials
+        env:
+          MACOS_CERT_P12_BASE64: ${{ secrets.MACOS_CERT_P12_BASE64 }}
+          MACOS_CERT_PASSWORD: ${{ secrets.MACOS_CERT_PASSWORD }}
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_KEY_P8_BASE64: ${{ secrets.ASC_KEY_P8_BASE64 }}
+        run: |
+          # Refuse to run at all rather than fall back to an ad-hoc signature.
+          # A release that looks published but is rejected by Gatekeeper is
+          # worse than no release: GitHub releases are immutable here, so the
+          # bad artifact cannot be replaced afterwards.
+          missing=""
+          for var in MACOS_CERT_P12_BASE64 MACOS_CERT_PASSWORD \
+                     ASC_KEY_ID ASC_ISSUER_ID ASC_KEY_P8_BASE64; do
+            [ -n "${!var}" ] || missing="${missing} ${var}"
+          done
+          if [ -n "${missing}" ]; then
+            echo "::error::Missing required signing secrets:${missing}"
+            exit 1
+          fi
 
       - name: Select Xcode
         run: sudo xcode-select -s /Applications/Xcode.app
@@ -29,12 +62,68 @@ jobs:
       - name: Generate Xcode project
         run: xcodegen generate
 
-      - name: Derive version
-        id: version
+      - name: Check version matches project.yml
         run: |
+          # Guards against tagging vN while the app reports vM — the app's own
+          # version is what users and Homebrew see.
           VERSION="${{ github.event.inputs.version }}"
+          PROJECT_VERSION=$(awk '/MARKETING_VERSION:/ {gsub(/"/, "", $2); print $2; exit}' project.yml)
+          if [ "${VERSION}" != "${PROJECT_VERSION}" ]; then
+            echo "::error::Requested version ${VERSION} does not match MARKETING_VERSION ${PROJECT_VERSION} in project.yml. Bump project.yml first."
+            exit 1
+          fi
           echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
-          echo "Building version ${VERSION}"
+        id: version
+
+      - name: Run tests
+        run: |
+          # Ad-hoc signed: this runs before the Developer ID certificate is
+          # imported, and the tests do not depend on the release identity.
+          set -o pipefail
+          xcodebuild test \
+            -project MDViewer.xcodeproj \
+            -scheme "$SCHEME" \
+            -destination 'platform=macOS' \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_STYLE=Manual \
+            CODE_SIGN_IDENTITY="-" \
+            DEVELOPMENT_TEAM="" \
+            ENABLE_HARDENED_RUNTIME=NO
+
+      - name: Import signing certificate
+        env:
+          MACOS_CERT_P12_BASE64: ${{ secrets.MACOS_CERT_P12_BASE64 }}
+          MACOS_CERT_PASSWORD: ${{ secrets.MACOS_CERT_PASSWORD }}
+        run: |
+          KEYCHAIN_PATH="$RUNNER_TEMP/signing.keychain-db"
+          KEYCHAIN_PASSWORD=$(uuidgen)
+          echo "KEYCHAIN_PATH=${KEYCHAIN_PATH}" >> "$GITHUB_ENV"
+
+          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security set-keychain-settings -lut 3600 "$KEYCHAIN_PATH"
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+
+          if base64 --help 2>&1 | grep -q -- '--decode'; then
+            BASE64_DECODE_FLAG="--decode"
+          else
+            BASE64_DECODE_FLAG="-D"
+          fi
+          echo "$MACOS_CERT_P12_BASE64" | base64 "$BASE64_DECODE_FLAG" > "$RUNNER_TEMP/cert.p12"
+          security import "$RUNNER_TEMP/cert.p12" \
+            -k "$KEYCHAIN_PATH" \
+            -P "$MACOS_CERT_PASSWORD" \
+            -T /usr/bin/codesign
+          rm -f "$RUNNER_TEMP/cert.p12"
+
+          security set-key-partition-list \
+            -S apple-tool:,apple:,codesign: \
+            -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH" >/dev/null
+          security list-keychains -d user -s "$KEYCHAIN_PATH" login.keychain-db
+
+          security find-identity -v -p codesigning "$KEYCHAIN_PATH" \
+            | grep -q "Developer ID Application" \
+            || { echo "::error::No Developer ID Application identity in the imported certificate"; exit 1; }
 
       - name: Archive
         run: |
@@ -45,42 +134,111 @@ jobs:
             -configuration "$CONFIGURATION" \
             -destination 'generic/platform=macOS' \
             -archivePath "build/${APP_NAME}.xcarchive" \
-            CODE_SIGNING_ALLOWED=NO \
-            CODE_SIGN_IDENTITY="-" \
+            CODE_SIGN_STYLE=Manual \
+            CODE_SIGN_IDENTITY="Developer ID Application" \
+            DEVELOPMENT_TEAM="$TEAM_ID" \
+            OTHER_CODE_SIGN_FLAGS="--timestamp --options=runtime" \
             archive
 
-      - name: Export .app
+      - name: Export Developer ID build
         run: |
-          mkdir -p build/export
-          cp -R "build/${APP_NAME}.xcarchive/Products/Applications/${APP_NAME}.app" build/export/
+          cat > "$RUNNER_TEMP/exportOptions.plist" <<PLIST
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+            <key>method</key><string>developer-id</string>
+            <key>teamID</key><string>${TEAM_ID}</string>
+            <key>signingStyle</key><string>manual</string>
+            <key>destination</key><string>export</string>
+          </dict>
+          </plist>
+          PLIST
 
-      - name: Ad-hoc codesign
+          xcodebuild -exportArchive \
+            -archivePath "build/${APP_NAME}.xcarchive" \
+            -exportOptionsPlist "$RUNNER_TEMP/exportOptions.plist" \
+            -exportPath build/export
+
+      - name: Notarize and staple
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_KEY_P8_BASE64: ${{ secrets.ASC_KEY_P8_BASE64 }}
         run: |
-          codesign --force --deep --sign - "build/export/${APP_NAME}.app"
+          if base64 --help 2>&1 | grep -q -- '--decode'; then
+            BASE64_DECODE_FLAG="--decode"
+          else
+            BASE64_DECODE_FLAG="-D"
+          fi
+          echo "$ASC_KEY_P8_BASE64" | base64 "$BASE64_DECODE_FLAG" > "$RUNNER_TEMP/asc_key.p8"
+
+          # notarytool takes a zip; the ticket is stapled to the .app afterwards.
+          ditto -c -k --sequesterRsrc --keepParent \
+            "build/export/${APP_NAME}.app" "$RUNNER_TEMP/notarize.zip"
+
+          xcrun notarytool submit "$RUNNER_TEMP/notarize.zip" \
+            --key "$RUNNER_TEMP/asc_key.p8" \
+            --key-id "$ASC_KEY_ID" \
+            --issuer "$ASC_ISSUER_ID" \
+            --wait
+
+          rm -f "$RUNNER_TEMP/asc_key.p8" "$RUNNER_TEMP/notarize.zip"
+          xcrun stapler staple "build/export/${APP_NAME}.app"
+
+      - name: Verify artifact is shippable
+        run: |
+          # Hard gate. Everything below must hold before anything is published.
+          set -o pipefail
+          APP="build/export/${APP_NAME}.app"
+
+          codesign --verify --deep --strict --verbose=2 "$APP"
+
+          codesign -dv --verbose=2 "$APP" 2>&1 | tee /tmp/codesign.txt
+          grep -q "Authority=Developer ID Application" /tmp/codesign.txt \
+            || { echo "::error::Not signed with a Developer ID Application certificate"; exit 1; }
+          grep -q "flags=.*runtime" /tmp/codesign.txt \
+            || { echo "::error::Hardened runtime is not enabled"; exit 1; }
+
+          spctl -a -vvv -t exec "$APP" 2>&1 | tee /tmp/spctl.txt
+          grep -q "source=Notarized Developer ID" /tmp/spctl.txt \
+            || { echo "::error::Gatekeeper does not see a notarized Developer ID build"; exit 1; }
+
+          xcrun stapler validate "$APP"
 
       - name: Create zip
         id: zip
         run: |
+          set -o pipefail
           VERSION="${{ steps.version.outputs.version }}"
           ZIP_NAME="${APP_NAME}-${VERSION}.zip"
           cd build/export
           ditto -c -k --sequesterRsrc --keepParent "${APP_NAME}.app" "../../${ZIP_NAME}"
           cd ../..
+
+          # The ticket must survive the round-trip, or downloaders are blocked.
+          rm -rf build/verify && mkdir -p build/verify
+          ditto -x -k "${ZIP_NAME}" build/verify
+          spctl -a -vvv -t exec "build/verify/${APP_NAME}.app" 2>&1 | grep -q "source=Notarized Developer ID" \
+            || { echo "::error::Notarization did not survive zipping"; exit 1; }
+
           SHA256=$(shasum -a 256 "${ZIP_NAME}" | awk '{print $1}')
           SIZE=$(stat -f%z "${ZIP_NAME}")
           echo "zip_name=${ZIP_NAME}" >> "$GITHUB_OUTPUT"
           echo "sha256=${SHA256}" >> "$GITHUB_OUTPUT"
-          echo "## Release ${VERSION}" >> "$GITHUB_STEP_SUMMARY"
-          echo "" >> "$GITHUB_STEP_SUMMARY"
-          echo "**Artifact:** \`${ZIP_NAME}\`" >> "$GITHUB_STEP_SUMMARY"
-          echo "**Size:** ${SIZE} bytes" >> "$GITHUB_STEP_SUMMARY"
-          echo "**SHA256:** \`${SHA256}\`" >> "$GITHUB_STEP_SUMMARY"
-          echo "" >> "$GITHUB_STEP_SUMMARY"
-          echo "Update the Homebrew cask:" >> "$GITHUB_STEP_SUMMARY"
-          echo "\`\`\`ruby" >> "$GITHUB_STEP_SUMMARY"
-          echo "version \"${VERSION}\"" >> "$GITHUB_STEP_SUMMARY"
-          echo "sha256 \"${SHA256}\"" >> "$GITHUB_STEP_SUMMARY"
-          echo "\`\`\`" >> "$GITHUB_STEP_SUMMARY"
+          {
+            echo "## Release ${VERSION}"
+            echo ""
+            echo "**Artifact:** \`${ZIP_NAME}\`"
+            echo "**Size:** ${SIZE} bytes"
+            echo "**SHA256:** \`${SHA256}\`"
+            echo ""
+            echo "Update the Homebrew cask:"
+            echo '```ruby'
+            echo "version \"${VERSION}\""
+            echo "sha256 \"${SHA256}\""
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Create GitHub Release
         env:
@@ -118,3 +276,10 @@ jobs:
             --title "MDViewer ${VERSION}" \
             --notes "${NOTES}" \
             "${ZIP_NAME}"
+
+      - name: Clean up keychain
+        if: always()
+        run: |
+          if [ -n "${KEYCHAIN_PATH:-}" ] && [ -f "$KEYCHAIN_PATH" ]; then
+            security delete-keychain "$KEYCHAIN_PATH" || true
+          fi

@@ -50,6 +50,7 @@ jobs:
             -scheme MDViewer \
             -destination 'platform=macOS' \
             -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
             CODE_SIGN_STYLE=Manual \
             CODE_SIGN_IDENTITY="-" \
             DEVELOPMENT_TEAM="" \

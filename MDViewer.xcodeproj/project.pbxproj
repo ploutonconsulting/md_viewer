@@ -7,30 +7,47 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C35533F2FCDC761002BB990 /* sample.md in Resources */ = {isa = PBXBuildFile; fileRef = 0C35533E2FCDC761002BB990 /* sample.md */; };
-		0C3553412FCDD351002BB990 /* Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3553402FCDD351002BB990 /* Format.swift */; };
-		0C3553512FCDE100002BB990 /* LineSpacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3553502FCDE100002BB990 /* LineSpacing.swift */; };
+		30C6153BE167ED967EA46929 /* FrontmatterTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D938E678F7C1EC804CE7CACE /* FrontmatterTableView.swift */; };
 		3F11BDB290365E2AE950FED7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6C2EDBA76E05ABAC4E174 /* Assets.xcassets */; };
 		4D861C09522F138B17B2EFCD /* MDViewerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0CCC5A27526C86F1BB19866 /* MDViewerApp.swift */; };
+		52EFAAF2F12BA6EDB5628D6D /* FrontmatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C35F91ADF7565B00294D52F /* FrontmatterTests.swift */; };
 		70D7AEF2D01DFE1F3B8D1CFD /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8373B23202E3D4A354074E4A /* MarkdownUI */; };
+		722F2C01E45F90B6740BE7C9 /* Frontmatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B619233952625291855553 /* Frontmatter.swift */; };
+		7604BD459799B6B37833203A /* LineSpacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2379E86B98395F23EA391B17 /* LineSpacing.swift */; };
+		8977BC4F8AC8099EC1A568D9 /* Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60DC80BCAD9CEDA9B218D7 /* Format.swift */; };
 		A1B1788E63C280578CBD2A99 /* MarkdownDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B5EECC9DA43854137CCA4F /* MarkdownDocument.swift */; };
 		B78F884C8AE734C94D61EF32 /* DocumentSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDE3AE4B23A4F67F2A0B7C3 /* DocumentSection.swift */; };
+		B97DBB5D46B7A7858B150005 /* sample.md in Resources */ = {isa = PBXBuildFile; fileRef = EED9AAF313AF0760439972F7 /* sample.md */; };
 		BF6223C28FFF82CAA235F223 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36B10A85484ABEC4EB3EFD8 /* ContentView.swift */; };
 		FF59175CF228DBBC795C4FDD /* OutlineSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F519BCABE5E8D36FC0EB4B /* OutlineSidebarView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		27269DD3940E0391041237AA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0DF200EDE3B21792C4B8F45B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9A5FCE18BDAE8C363B2A821C;
+			remoteInfo = MDViewer;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		01CB89DA2B075F37F80CCDAD /* MDViewer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MDViewer.entitlements; sourceTree = "<group>"; };
-		0C35533E2FCDC761002BB990 /* sample.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = sample.md; sourceTree = "<group>"; };
-		0C3553402FCDD351002BB990 /* Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Format.swift; sourceTree = "<group>"; };
-		0C3553502FCDE100002BB990 /* LineSpacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineSpacing.swift; sourceTree = "<group>"; };
 		0FA6C2EDBA76E05ABAC4E174 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2379E86B98395F23EA391B17 /* LineSpacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineSpacing.swift; sourceTree = "<group>"; };
+		26B619233952625291855553 /* Frontmatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Frontmatter.swift; sourceTree = "<group>"; };
+		8E60DC80BCAD9CEDA9B218D7 /* Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Format.swift; sourceTree = "<group>"; };
 		9BDE3AE4B23A4F67F2A0B7C3 /* DocumentSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentSection.swift; sourceTree = "<group>"; };
+		9C35F91ADF7565B00294D52F /* FrontmatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontmatterTests.swift; sourceTree = "<group>"; };
+		9CA10FC3C61C08E0DEFAD920 /* MDViewerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MDViewerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A36B10A85484ABEC4EB3EFD8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B2B94D6ECFF439ABF8F84105 /* MDViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MDViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7B5EECC9DA43854137CCA4F /* MarkdownDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownDocument.swift; sourceTree = "<group>"; };
+		D938E678F7C1EC804CE7CACE /* FrontmatterTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontmatterTableView.swift; sourceTree = "<group>"; };
 		E0CCC5A27526C86F1BB19866 /* MDViewerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDViewerApp.swift; sourceTree = "<group>"; };
 		E8B10415F03AE42AE0BE7478 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		EED9AAF313AF0760439972F7 /* sample.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = sample.md; sourceTree = "<group>"; };
 		F4F519BCABE5E8D36FC0EB4B /* OutlineSidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineSidebarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -50,14 +67,32 @@
 			isa = PBXGroup;
 			children = (
 				B2B94D6ECFF439ABF8F84105 /* MDViewer.app */,
+				9CA10FC3C61C08E0DEFAD920 /* MDViewerTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		200483D62DD48AD3305B114A /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				4DE9EFACDC521473D2959DFF /* MDViewerTests */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		4DE9EFACDC521473D2959DFF /* MDViewerTests */ = {
+			isa = PBXGroup;
+			children = (
+				9C35F91ADF7565B00294D52F /* FrontmatterTests.swift */,
+			);
+			path = MDViewerTests;
 			sourceTree = "<group>";
 		};
 		948C07D6D92DE79B515C2B00 = {
 			isa = PBXGroup;
 			children = (
 				C390773B988CC4EA09B171D4 /* Sources */,
+				200483D62DD48AD3305B114A /* Tests */,
 				09BD76EE28C792BB9AEEBF8B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -67,13 +102,15 @@
 			children = (
 				A36B10A85484ABEC4EB3EFD8 /* ContentView.swift */,
 				9BDE3AE4B23A4F67F2A0B7C3 /* DocumentSection.swift */,
+				8E60DC80BCAD9CEDA9B218D7 /* Format.swift */,
+				26B619233952625291855553 /* Frontmatter.swift */,
+				D938E678F7C1EC804CE7CACE /* FrontmatterTableView.swift */,
 				E8B10415F03AE42AE0BE7478 /* Info.plist */,
+				2379E86B98395F23EA391B17 /* LineSpacing.swift */,
 				D7B5EECC9DA43854137CCA4F /* MarkdownDocument.swift */,
 				01CB89DA2B075F37F80CCDAD /* MDViewer.entitlements */,
 				E0CCC5A27526C86F1BB19866 /* MDViewerApp.swift */,
 				F4F519BCABE5E8D36FC0EB4B /* OutlineSidebarView.swift */,
-				0C3553402FCDD351002BB990 /* Format.swift */,
-				0C3553502FCDE100002BB990 /* LineSpacing.swift */,
 			);
 			path = MDViewer;
 			sourceTree = "<group>";
@@ -91,7 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				0FA6C2EDBA76E05ABAC4E174 /* Assets.xcassets */,
-				0C35533E2FCDC761002BB990 /* sample.md */,
+				EED9AAF313AF0760439972F7 /* sample.md */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -119,6 +156,24 @@
 			productReference = B2B94D6ECFF439ABF8F84105 /* MDViewer.app */;
 			productType = "com.apple.product-type.application";
 		};
+		9E50EFD011C50268C447D600 /* MDViewerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9F19D8BC072CFB74E0CCA62E /* Build configuration list for PBXNativeTarget "MDViewerTests" */;
+			buildPhases = (
+				F67D603DDC55F3F12FCFA933 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D1B982473141D8E3CD75ED60 /* PBXTargetDependency */,
+			);
+			name = MDViewerTests;
+			packageProductDependencies = (
+			);
+			productName = MDViewerTests;
+			productReference = 9CA10FC3C61C08E0DEFAD920 /* MDViewerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -129,6 +184,10 @@
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					9A5FCE18BDAE8C363B2A821C = {
+						DevelopmentTeam = 7X2XV24BPN;
+						ProvisioningStyle = Automatic;
+					};
+					9E50EFD011C50268C447D600 = {
 						DevelopmentTeam = 7X2XV24BPN;
 						ProvisioningStyle = Automatic;
 					};
@@ -152,6 +211,7 @@
 			projectRoot = "";
 			targets = (
 				9A5FCE18BDAE8C363B2A821C /* MDViewer */,
+				9E50EFD011C50268C447D600 /* MDViewerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -161,8 +221,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C35533F2FCDC761002BB990 /* sample.md in Resources */,
 				3F11BDB290365E2AE950FED7 /* Assets.xcassets in Resources */,
+				B97DBB5D46B7A7858B150005 /* sample.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,15 +235,33 @@
 			files = (
 				BF6223C28FFF82CAA235F223 /* ContentView.swift in Sources */,
 				B78F884C8AE734C94D61EF32 /* DocumentSection.swift in Sources */,
-				0C3553412FCDD351002BB990 /* Format.swift in Sources */,
-				0C3553512FCDE100002BB990 /* LineSpacing.swift in Sources */,
+				8977BC4F8AC8099EC1A568D9 /* Format.swift in Sources */,
+				722F2C01E45F90B6740BE7C9 /* Frontmatter.swift in Sources */,
+				30C6153BE167ED967EA46929 /* FrontmatterTableView.swift in Sources */,
+				7604BD459799B6B37833203A /* LineSpacing.swift in Sources */,
 				4D861C09522F138B17B2EFCD /* MDViewerApp.swift in Sources */,
 				A1B1788E63C280578CBD2A99 /* MarkdownDocument.swift in Sources */,
 				FF59175CF228DBBC795C4FDD /* OutlineSidebarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F67D603DDC55F3F12FCFA933 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52EFAAF2F12BA6EDB5628D6D /* FrontmatterTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D1B982473141D8E3CD75ED60 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9A5FCE18BDAE8C363B2A821C /* MDViewer */;
+			targetProxy = 27269DD3940E0391041237AA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		3180EC117B385984E629525A /* Release */ = {
@@ -242,12 +320,30 @@
 			};
 			name = Release;
 		};
+		5B446C00899EFD0E62997219 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 7X2XV24BPN;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ploutonconsulting.MDViewerTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MDViewer.app/Contents/MacOS/MDViewer";
+			};
+			name = Debug;
+		};
 		8869D68D1C7BEF470AD8BCBE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Sources/MDViewer/MDViewer.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 4;
@@ -256,8 +352,6 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Sources/MDViewer/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = MDPreviewer;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -332,12 +426,30 @@
 			};
 			name = Debug;
 		};
+		CBA986C53D5DEE814082EF49 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 7X2XV24BPN;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ploutonconsulting.MDViewerTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MDViewer.app/Contents/MacOS/MDViewer";
+			};
+			name = Release;
+		};
 		FB34AF5FD64ECE737E0B6A05 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Sources/MDViewer/MDViewer.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 4;
@@ -346,8 +458,6 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Sources/MDViewer/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = MDPreviewer;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -376,6 +486,15 @@
 			buildConfigurations = (
 				FB34AF5FD64ECE737E0B6A05 /* Debug */,
 				8869D68D1C7BEF470AD8BCBE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		9F19D8BC072CFB74E0CCA62E /* Build configuration list for PBXNativeTarget "MDViewerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5B446C00899EFD0E62997219 /* Debug */,
+				CBA986C53D5DEE814082EF49 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

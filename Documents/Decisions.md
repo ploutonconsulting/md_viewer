@@ -120,3 +120,38 @@ Use the **spec as a design reference** for future UX work, particularly:
 - No new dependency introduced.
 - Paged navigation is a well-scoped future feature: state change in `ContentView`, two toolbar buttons, no new parsing logic needed.
 - Full mdxg spec conformance is achievable natively with ~1–2 focused sessions of work.
+
+---
+
+## ADR-007 — Render YAML frontmatter as a metadata table
+
+**Date:** 2026-07-26  
+**Status:** Accepted
+
+### Context
+A document opening with a YAML frontmatter block (`---` ... `---`) was rendered as document
+content instead of metadata: `swift-markdown-ui` has no frontmatter concept, so the opening
+fence parses as a CommonMark thematic break and the block itself parses as a setext H2 (see
+Issue #11). Options considered:
+1. Render the frontmatter as a key/value table above the document body.
+2. Add a View-menu toggle to suppress frontmatter rendering entirely.
+
+### Decision
+Strip frontmatter from the document before it reaches `parsedSections()` / `MarkdownUI`, and
+render it as a dedicated SwiftUI key/value table (`FrontmatterTableView`) above the body in
+Preview mode. Values render through `Text`, never through `Markdown`, so Markdown syntax inside
+a value is shown verbatim rather than interpreted. The suppression-toggle alternative was not
+built — a table communicates the metadata rather than hiding it.
+
+The parser (`FrontmatterParser`) is a minimal line scanner scoped to the shapes observed in a
+176-document corpus survey (scalar, empty-value, block-sequence, and inline-flow-sequence keys),
+not a YAML engine — no new package dependency. A validation gate rejects any fenced block that
+isn't YAML-shaped, so a document that opens with a stylistic `---` divider is left untouched:
+`split` returns `nil` and the body is the byte-identical original input.
+
+### Consequences
+- Raw mode is unaffected — it stays byte-verbatim, fences included, by design.
+- Nested mappings, `|`/`>` block scalars, and YAML comments are out of scope; a block scalar
+  degrades to a literal `|` value rather than crashing.
+- No frontmatter support in the PDF export pipeline yet — revisit at integration time with
+  `feature/pdf-export`.

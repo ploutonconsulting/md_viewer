@@ -5,6 +5,16 @@ All notable changes to MDViewer are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+- YAML frontmatter no longer misrenders as a horizontal rule and an
+  oversized heading. A document that opens with a `---`/`---` (or `...`)
+  fenced, YAML-shaped block now renders that block as a key/value metadata
+  table above the document body in Preview mode; values are shown verbatim,
+  so Markdown syntax inside a value is not interpreted. Raw mode is
+  unaffected and still shows the fences byte-for-byte. (#11)
+
 ## [0.2] - 2026-06-01
 
 ### Added

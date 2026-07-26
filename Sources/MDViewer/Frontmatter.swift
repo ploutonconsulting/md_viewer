@@ -76,12 +76,7 @@ enum FrontmatterParser {
             }
 
             if isIndented(line) {
-                // An indented line reached outside of a key's continuation
-                // block: still a valid shape (sequence item or continuation
-                // line), so it is simply ignored per §4.
-                guard isBlockSequenceItem(line) || isIndentedContinuation(line) else {
-                    return nil
-                }
+                // Any indented non-blank line is a valid continuation shape per the gate.
                 index += 1
                 continue
             }

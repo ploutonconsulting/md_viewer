@@ -84,11 +84,23 @@ enum FrontmatterParser {
             guard let colon = line.firstIndex(of: ":") else {
                 return nil
             }
+
+            // YAML block mappings require ':' to be followed by whitespace or end-of-line.
+            let afterColonIndex = line.index(after: colon)
+            if afterColonIndex < line.endIndex {
+                let afterColon = line[afterColonIndex]
+                guard afterColon == " " || afterColon == "\t" else {
+                    return nil
+                }
+            }
+
+            let key = String(line[..<colon]).trimmingCharacters(in: .whitespacesAndNewlines)
+            guard !key.isEmpty else {
+                return nil
+            }
             sawKeyLine = true
 
-            let key = String(line[line.startIndex..<colon]).trimmingCharacters(in: .whitespacesAndNewlines)
-            var value = String(line[line.index(after: colon)...]).trimmingCharacters(in: .whitespacesAndNewlines)
-
+            var value = String(line[afterColonIndex...]).trimmingCharacters(in: .whitespacesAndNewlines)
             // Gather indented lines that belong to this key, up to the next
             // unindented line.
             var listItems: [String] = []
